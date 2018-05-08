@@ -29,66 +29,11 @@ package ez.image.color;
  */
 public interface Color {
     
-    public static final Color
-            RED = of(1.0f, 0.0f, 0.0f),
-            GREEN = of(0.0f, 1.0f, 0.0f),
-            BLUE = of(0.0f, 0.0f, 1.0f);
-    
-    
     public float red();
     public float green();
     public float blue();
     public float alpha();
     
-    public static Color of(float red, float green, float blue){
-        return new RGBColor(red, green, blue);
-    }
-    
 }
 
-class RGBColor implements Color{
-    
-    private final float red, green, blue;
-    
-    RGBColor(float red, float green, float blue) {
-        this.red = red; this.green = green; this.blue = blue;
-    }
-    
-    @Override
-    public float red() {return red;}
 
-    @Override
-    public float green() {return green;}
-
-    @Override
-    public float blue() {return blue;}
-
-    @Override
-    public float alpha() {return 1.0f;}
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (getClass() != obj.getClass()) return false;
-        final RGBColor other = (RGBColor) obj;
-        if (Float.floatToIntBits(this.red)  != Float.floatToIntBits(other.red) &&
-            Float.floatToIntBits(this.green)!= Float.floatToIntBits(other.green) &&
-            Float.floatToIntBits(this.blue) != Float.floatToIntBits(other.blue)){
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + Float.floatToIntBits(this.red);
-        hash = 97 * hash + Float.floatToIntBits(this.green);
-        hash = 97 * hash + Float.floatToIntBits(this.blue);
-        return hash;
-    }
-    
-    
-    
-}
