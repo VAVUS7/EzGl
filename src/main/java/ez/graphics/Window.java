@@ -23,9 +23,7 @@
  */
 package ez.graphics;
 
-import ez.graphics.gl.ContextBindMap;
 import ez.image.Image;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import static org.lwjgl.glfw.GLFW.*;
@@ -59,23 +57,23 @@ public class Window {
         scenes.forEach((sc) -> {
             sc.draw();
         });
-        glfwSwapBuffers(context.getGlfwContext());
+        glfwSwapBuffers(context.glfwContext);
     }
     
     public boolean shouldClose(){
-        return glfwWindowShouldClose(context.getGlfwContext());
+        return glfwWindowShouldClose(context.glfwContext);
     }
     
     public void setIcon(Image im){
-        glfwSetWindowIcon(context.getGlfwContext(), new GLFWImage.Buffer(im.getPixels()));
+        glfwSetWindowIcon(context.glfwContext, new GLFWImage.Buffer(im.getPixels()));
     }
     
     public void show(){
-        glfwShowWindow(context.getGlfwContext());
+        glfwShowWindow(context.glfwContext);
     }
     
     public void hide(){
-        glfwHideWindow(context.getGlfwContext());
+        glfwHideWindow(context.glfwContext);
     }
     
     

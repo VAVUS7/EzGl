@@ -12,9 +12,10 @@ import static org.lwjgl.glfw.GLFW.glfwInit;
  *
  * @author vlad
  */
-public class WindowSystem {
+public class Graphics {
     
     private static boolean isInit = false;
+    
     private static int majorOpenGlVersion = 3;
     private static int minorOpenGlVersion = 3;
     

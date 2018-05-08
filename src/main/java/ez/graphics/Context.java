@@ -33,10 +33,10 @@ import static org.lwjgl.glfw.GLFW.*;
 public class Context{
     
     private final ContextBindMap bindMap;    
-    private final long context;
+    final long glfwContext;
     
     Context(long window){
-        context = window;
+        glfwContext = window;
         bindMap = new ContextBindMap();
     }
     
@@ -45,12 +45,10 @@ public class Context{
     
     public void makeCurrent(){
         if(!isCurrent()){
-            glfwMakeContextCurrent(context);
+            glfwMakeContextCurrent(glfwContext);
             CURRENT_CONTEXT.set(this);
         }
     };
-    
-    long getGlfwContext(){return context;}
     
     public ContextBindMap getContextBindMap(){return bindMap;};
     
