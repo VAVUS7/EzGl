@@ -30,14 +30,18 @@ import static org.lwjgl.glfw.GLFW.*;
  *
  * @author vlad
  */
-public abstract class Context {
+public class Context{
+    
+    private final ContextBindMap bindMap;    
+    private final long context;
+    
+    Context(long window){
+        context = window;
+        bindMap = new ContextBindMap();
+    }
     
     private static final ThreadLocal<Context> CURRENT_CONTEXT = new ThreadLocal<>();
     public static Context currentContext(){return CURRENT_CONTEXT.get();}
-    //private ContextBindMap bindMap;    
-    private long context;
-    
-    Context(long window){context = window;}
     
     public void makeCurrent(){
         if(!isCurrent()){
@@ -48,7 +52,7 @@ public abstract class Context {
     
     long getGlfwContext(){return context;}
     
-    public abstract ContextBindMap getContextBindMap();
+    public ContextBindMap getContextBindMap(){return bindMap;};
     
     public boolean isCurrent(){return this == currentContext();}
 }

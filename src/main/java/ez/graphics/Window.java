@@ -42,7 +42,7 @@ public class Window {
     
     public Window(int width, int height, String title, long monitor, long share, boolean supportOpenGl){
         long window = glfwCreateWindow(width, height, title, monitor, share);
-        context = new GlContext(window);
+        context = new Context(window);
     }
     
     public void addScene(Scene scene){
@@ -56,8 +56,9 @@ public class Window {
     
     public void draw(){
         context.makeCurrent();
-        for(Scene sc : scenes)
+        scenes.forEach((sc) -> {
             sc.draw();
+        });
         glfwSwapBuffers(context.getGlfwContext());
     }
     
@@ -78,19 +79,5 @@ public class Window {
     }
     
     
-    
-}
-
-class GlContext extends Context{
-    
-    private final ContextBindMap bindMap;
-    
-    GlContext(long window){
-        super(window);
-        bindMap = new ContextBindMap();
-    }
-    
-    @Override
-    public ContextBindMap getContextBindMap() {return bindMap;}
     
 }
