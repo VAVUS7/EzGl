@@ -7,6 +7,8 @@ package window;
 
 import ez.graphics.Graphics;
 import ez.graphics.Window;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 
 /**
  *
@@ -17,7 +19,6 @@ public class WindowSystemTest {
     
     public static void main(String[] args) throws InterruptedException {
         System.out.println("RUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUN");
-        
         Graphics.init();
         Window w = new Window(500, 500, "window", 0, 0, true);
         w.show();
