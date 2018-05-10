@@ -1,5 +1,6 @@
 package ez.gl;
 
+import ez.gl.enums.ShaderType;
 import java.io.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;

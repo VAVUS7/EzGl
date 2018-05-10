@@ -23,6 +23,9 @@
  */
 package ez.gl;
 
+import ez.gl.enums.MinFilter;
+import ez.gl.enums.MagFilter;
+import ez.gl.enums.WrapMode;
 import ez.image.Image;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
