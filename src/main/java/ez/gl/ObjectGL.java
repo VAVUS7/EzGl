@@ -27,12 +27,11 @@ package ez.gl;
  *
  * @author vlad
  */
-public interface GLObject{
+public interface ObjectGL{
     
     public static final int NULLOBJ = 0;
     public static final int NULLVAL = -1;
     
     public void delete();
-    public boolean isExist();
 
 }

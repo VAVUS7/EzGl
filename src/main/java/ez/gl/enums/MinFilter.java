@@ -34,7 +34,7 @@ import static org.lwjgl.opengl.GL11.GL_NEAREST_MIPMAP_NEAREST;
  *
  * @author vlad
  */
-public enum MinFilter{
+public enum MinFilter implements GLenum{
         
     NEAREST(GL_NEAREST), LINEAR(GL_LINEAR),
     NEAREST_MIPMAP_NEAREST(GL_NEAREST_MIPMAP_NEAREST),
@@ -42,9 +42,12 @@ public enum MinFilter{
     NEAREST_MIPMAP_LINEAR(GL_NEAREST_MIPMAP_LINEAR),
     LINEAR_MIPMAP_LINEAR(GL_LINEAR_MIPMAP_LINEAR);
     
-    public final int MIN_FILTER;
+    private final int filter;
     
     MinFilter(int filter){
-        MIN_FILTER = filter;
+        this.filter = filter;
     }
+
+    @Override
+    public int asGLenum() {return filter;}
 }

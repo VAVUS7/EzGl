@@ -30,14 +30,17 @@ import static org.lwjgl.opengl.GL11.GL_NEAREST;
  *
  * @author vlad
  */
-public enum MagFilter {
+public enum MagFilter implements GLenum{
     
     NEAREST(GL_NEAREST),
     LINEAR(GL_LINEAR);
     
-    public final int MAG_FILTER;
+    private final int filter;
     
     MagFilter(int filter){
-        MAG_FILTER = filter;
+        this.filter = filter;
     }
+
+    @Override
+    public int asGLenum() {return filter;}
 }

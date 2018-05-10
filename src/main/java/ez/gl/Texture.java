@@ -25,43 +25,26 @@ package ez.gl;
 
 import ez.gl.enums.MinFilter;
 import ez.gl.enums.MagFilter;
+import ez.gl.enums.TextureType;
 import ez.gl.enums.WrapMode;
-import ez.image.Image;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL12.*;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 
 /**
  *
  * @author vlad
  */
-public class Texture implements GLObject{
+public abstract class Texture implements ObjectGLBind{
     
     int texture;
-    int sampler;
     
-    private Texture(int texture) {
-        this.texture = texture;
-    }
-    
-    public Texture(Image im){
+    protected Texture() {
         texture = glGenTextures();
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glTexImage2D(
-                GL_TEXTURE_2D, 0, asGlPixelFormat(im.getComponents()), 
-                im.getWidth(), im.getHeight(), 0, asGlPixelFormat(im.getComponents()), 
-                GL_UNSIGNED_BYTE, im.getPixels());
     }
     
-    public Texture(Image im, int samplerBinding){
-        texture = glGenTextures();
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glTexImage2D(
-                GL_TEXTURE_2D, 0, asGlPixelFormat(im.getComponents()), 
-                im.getWidth(), im.getHeight(), 0, asGlPixelFormat(im.getComponents()), 
-                GL_UNSIGNED_BYTE, im.getPixels());
-    }
-    
-    private static int asGlPixelFormat(int comp){
+    @Deprecated
+    protected static int asGlPixelFormat(int comp){
         switch(comp){
             case 1: return GL_LUMINANCE;
             case 2: return GL_LUMINANCE_ALPHA;
@@ -71,44 +54,50 @@ public class Texture implements GLObject{
         }
     }
     
-    public void genMipmap(){
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
+    /**
+     * Возвращает тип данного объекта текстуры.
+     * @return тип текстуры.
+     */
+    public abstract TextureType getType();
     
-    public void bind(){
-        glBindTexture(GL_TEXTURE_2D, texture);
-    }
     
-    public void setWrapping(WrapMode s, WrapMode t){
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, s.WRAP_MODE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, t.WRAP_MODE);
-    }
-    
-    public void setFilters(MinFilter min, MagFilter mag){
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min.MIN_FILTER);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag.MAG_FILTER);
-    }
-    
-    @Override
-    public boolean isExist(){
-        return texture != NULLOBJ && glIsTexture(texture);
-    }
-
     @Override
     public void delete(){
-        if(isExist()){
+        if(texture != NULLOBJ){
             glDeleteTextures(texture);
             texture = NULLOBJ;
         }
     }
-
-    public int asGL(){return texture;}
     
+    protected final static void genMipmap(TextureType type){
+        glGenerateMipmap(type.asGLenum());
+    }
     
-    public boolean isBind() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected final static void bindTexture(Texture tex, TextureType type){
+        ContextBindMap map;
+        if((map = Context.currentContext().getContextBindMap()).getTexture() != tex){
+            glBindTexture(type.asGLenum(), tex.texture);
+            map.setTexture(tex);
+        }
+    }
+    
+    protected final static void setWrapping(TextureType type, WrapMode s){
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_S, s.asGLenum());
+    }
+    
+    protected final static void setWrapping(TextureType type, WrapMode s, WrapMode t){
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_S, s.asGLenum());
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_T, t.asGLenum());
+    }
+    
+    protected final static void setWrapping(TextureType type, WrapMode s, WrapMode t, WrapMode r){
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_S, s.asGLenum());
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_T, t.asGLenum());
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_R, s.asGLenum());
+    }
+    
+    protected final static void setFilters(TextureType type, MinFilter min, MagFilter mag){
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_MIN_FILTER, min.asGLenum());
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_MAG_FILTER, mag.asGLenum());
     }
 }

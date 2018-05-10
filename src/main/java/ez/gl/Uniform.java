@@ -1,6 +1,6 @@
 package ez.gl;
 
-import static ez.gl.GLObject.*;
+import static ez.gl.ObjectGL.*;
 import org.joml.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL21.*;

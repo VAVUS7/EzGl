@@ -7,15 +7,18 @@ import static org.lwjgl.opengl.GL40.GL_TESS_CONTROL_SHADER;
 import static org.lwjgl.opengl.GL40.GL_TESS_EVALUATION_SHADER;
 import static org.lwjgl.opengl.GL43.GL_COMPUTE_SHADER;
 
-public enum ShaderType {
+public enum ShaderType implements GLenum{
 
     VERTEX(GL_VERTEX_SHADER), FRAGMENT(GL_FRAGMENT_SHADER), 
     GEOMETRY(GL_GEOMETRY_SHADER), TESS_CONTROL(GL_TESS_CONTROL_SHADER), 
     TESS_EVALUATION(GL_TESS_EVALUATION_SHADER), COMPUTE(GL_COMPUTE_SHADER);
 
-    public final int type;
+    private final int type;
 
     ShaderType(int glShaderType) {
         this.type = glShaderType;
     }
+
+    @Override
+    public int asGLenum() {return type;}
 }

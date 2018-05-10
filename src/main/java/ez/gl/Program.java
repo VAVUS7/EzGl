@@ -9,7 +9,7 @@ import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.opengl.GL20.*;
 import org.lwjgl.system.MemoryStack;
 
-public final class Program implements GLObject{
+public final class Program implements ObjectGL{
     
     
     public static final Program NULL_PROGRAM = new Program();
@@ -58,14 +58,11 @@ public final class Program implements GLObject{
      */
     @Override
     public void delete() {
-        if(isExist()){
+        if(program != NULLOBJ){
             glDeleteProgram(program);
             program = NULLOBJ;
         }
     }
-
-    @Override
-    public boolean isExist() {return program != NULLOBJ;}
 
     public void use() {
         ContextBindMap map;

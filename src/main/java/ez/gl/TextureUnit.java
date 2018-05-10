@@ -23,10 +23,7 @@
  */
 package ez.gl;
 
-import static org.lwjgl.opengl.GL11.glGetInteger;
-import org.lwjgl.opengl.GL20;
-import static org.lwjgl.opengl.GL20.GL_MAX_TEXTURE_IMAGE_UNITS;
-import org.lwjgl.opengl.GL32;
+import static org.lwjgl.opengl.GL13.*;
 
 /**
  *
@@ -34,37 +31,21 @@ import org.lwjgl.opengl.GL32;
  */
 public final class TextureUnit {
     
-    static final ThreadLocal<TextureUnit> ACTIVE_UNIT = new ThreadLocal<>();
-    static int maxUnits = 0;
-    static TextureUnit[] units = null;
-    
     int unit;
-    final ThreadLocal<Texture> usedTexture;
-    
+
     TextureUnit(int unit){
         this.unit = unit;
-        usedTexture = new ThreadLocal<>();
     }
     
-    public static TextureUnit active(){
-        return ACTIVE_UNIT.get();
+    public void active(){
+        ContextBindMap map;
+        if((map = Context.currentContext().getContextBindMap()).getTextureUnit() != this){
+            glActiveTexture(unit);
+            map.setTextureUnit(this);
+        }
     }
     
     public static TextureUnit get(int unit){
-        if(units == null){
-            units = new TextureUnit[getMaxTexUnits()];
-            for(int i=0; i<units.length; i++){
-                units[i] = new TextureUnit(unit);
-            }
-        }
-        if(unit < 0 || unit > maxUnits)
-            throw new IllegalArgumentException("unit must be from 0 to " + maxUnits);
-        return units[unit];
-    }
-    
-    public static int getMaxTexUnits(){
-        if(maxUnits == 0)
-            maxUnits = glGetInteger(GL_MAX_TEXTURE_IMAGE_UNITS);
-        return maxUnits;
+        return new TextureUnit(unit);
     }
 }
