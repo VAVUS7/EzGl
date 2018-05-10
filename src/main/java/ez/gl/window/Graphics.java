@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ez.graphics;
+package ez.gl.window;
 
 import org.lwjgl.glfw.GLFW;
 import static org.lwjgl.glfw.GLFW.glfwInit;

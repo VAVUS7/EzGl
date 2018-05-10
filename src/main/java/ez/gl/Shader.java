@@ -1,4 +1,4 @@
-package ez.graphics.gl;
+package ez.gl;
 
 import java.io.*;
 import static org.lwjgl.opengl.GL11.*;

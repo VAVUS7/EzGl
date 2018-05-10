@@ -21,23 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package ez.graphics.gl;
+package ez.gl;
 
-import static org.lwjgl.opengl.GL11.GL_LINEAR;
-import static org.lwjgl.opengl.GL11.GL_NEAREST;
+import static org.lwjgl.opengl.GL11.GL_REPEAT;
+import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
+import static org.lwjgl.opengl.GL13.GL_CLAMP_TO_BORDER;
+import static org.lwjgl.opengl.GL14.GL_MIRRORED_REPEAT;
 
-/**
- *
- * @author vlad
- */
-public enum MagFilter {
+public enum WrapMode {
+    REPEAT(GL_REPEAT), MIRROR_REPEAT(GL_MIRRORED_REPEAT),
+    CLAMP_TO_EDGE(GL_CLAMP_TO_EDGE), CLAMP_TO_BORDER(GL_CLAMP_TO_BORDER);
     
-    NEAREST(GL_NEAREST),
-    LINEAR(GL_LINEAR);
-    
-    public final int MAG_FILTER;
-    
-    MagFilter(int filter){
-        MAG_FILTER = filter;
+    public final int WRAP_MODE;
+    WrapMode(int mode){
+        this.WRAP_MODE = mode;
     }
 }

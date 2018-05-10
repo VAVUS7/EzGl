@@ -21,18 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package ez.graphics.gl;
+package ez.gl;
 
 /**
  *
  * @author vlad
  */
-public class ContextBindMap {
-    
-    Program program;
-    
-    public Program getProgram(){return program;}
-    public void setProgram(Program p){program = p;}
-    
-    
+public class SyncObject {
+    //TODO
 }

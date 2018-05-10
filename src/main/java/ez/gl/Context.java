@@ -21,36 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package ez.graphics;
-
-import ez.graphics.gl.ContextBindMap;
-import static org.lwjgl.glfw.GLFW.*;
+package ez.gl;
 
 /**
  *
  * @author vlad
  */
-public class Context{
-    
-    private final ContextBindMap bindMap;    
-    final long glfwContext;
-    
-    Context(long window){
-        glfwContext = window;
-        bindMap = new ContextBindMap();
-    }
+public abstract class Context{
     
     private static final ThreadLocal<Context> CURRENT_CONTEXT = new ThreadLocal<>();
-    public static Context currentContext(){return CURRENT_CONTEXT.get();}
     
-    public void makeCurrent(){
-        if(!isCurrent()){
-            glfwMakeContextCurrent(glfwContext);
-            CURRENT_CONTEXT.set(this);
-        }
-    };
+    public static final Context currentContext(){return CURRENT_CONTEXT.get();}
+    public final boolean isCurrent(){return this == currentContext();}
     
-    public ContextBindMap getContextBindMap(){return bindMap;};
+    public void makeCurrent() {
+        if(!isCurrent()) CURRENT_CONTEXT.set(this);
+    }
     
-    public boolean isCurrent(){return this == currentContext();}
+    public abstract ContextBindMap getContextBindMap();
 }

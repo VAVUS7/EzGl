@@ -21,19 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package ez.graphics.gl;
+package ez.color;
 
-import static org.lwjgl.opengl.GL11.GL_REPEAT;
-import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
-import static org.lwjgl.opengl.GL13.GL_CLAMP_TO_BORDER;
-import static org.lwjgl.opengl.GL14.GL_MIRRORED_REPEAT;
-
-public enum WrapMode {
-    REPEAT(GL_REPEAT), MIRROR_REPEAT(GL_MIRRORED_REPEAT),
-    CLAMP_TO_EDGE(GL_CLAMP_TO_EDGE), CLAMP_TO_BORDER(GL_CLAMP_TO_BORDER);
+/**
+ *
+ * @author vlad
+ */
+public interface Color {
     
-    public final int WRAP_MODE;
-    WrapMode(int mode){
-        this.WRAP_MODE = mode;
+    public float red();
+    public float green();
+    public float blue();
+    public float alpha();
+    
+    public static Color blend(Color c1, Color c2){
+        return blend(c1, c2, c2.alpha());
     }
+    
+    //TODO: реалистичная функция смешивания
+    public static Color blend(Color c1, Color c2, float opacity){
+        throw new UnsupportedOperationException();
+    }
+    
 }
+
+

@@ -21,30 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package ez.graphics.gl;
-
-import static org.lwjgl.opengl.GL11.GL_LINEAR;
-import static org.lwjgl.opengl.GL11.GL_LINEAR_MIPMAP_LINEAR;
-import static org.lwjgl.opengl.GL11.GL_LINEAR_MIPMAP_NEAREST;
-import static org.lwjgl.opengl.GL11.GL_NEAREST;
-import static org.lwjgl.opengl.GL11.GL_NEAREST_MIPMAP_LINEAR;
-import static org.lwjgl.opengl.GL11.GL_NEAREST_MIPMAP_NEAREST;
+package ez.gl;
 
 /**
  *
  * @author vlad
  */
-public enum MinFilter{
-        
-    NEAREST(GL_NEAREST), LINEAR(GL_LINEAR),
-    NEAREST_MIPMAP_NEAREST(GL_NEAREST_MIPMAP_NEAREST),
-    LINEAR_MIPMAP_NEAREST(GL_LINEAR_MIPMAP_NEAREST),
-    NEAREST_MIPMAP_LINEAR(GL_NEAREST_MIPMAP_LINEAR),
-    LINEAR_MIPMAP_LINEAR(GL_LINEAR_MIPMAP_LINEAR);
+public interface GLObject{
     
-    public final int MIN_FILTER;
+    public static final int NULLOBJ = 0;
+    public static final int NULLVAL = -1;
     
-    MinFilter(int filter){
-        MIN_FILTER = filter;
-    }
+    public void delete();
+    public boolean isExist();
+
 }

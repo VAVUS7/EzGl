@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package ez.graphics.gl;
+package ez.gl;
 
 import static org.lwjgl.opengl.GL11.glGetInteger;
 import org.lwjgl.opengl.GL20;

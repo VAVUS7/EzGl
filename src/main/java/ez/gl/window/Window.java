@@ -21,8 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package ez.graphics;
+package ez.gl.window;
 
+import ez.gl.Context;
+import ez.gl.ContextBindMap;
 import ez.image.Image;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,48 +34,48 @@ import org.lwjgl.glfw.GLFWImage;
  *
  * @author vlad
  */
-public class Window {
+public class Window extends Context{
     
-    public Context context;
     
-    List<Scene> scenes = new LinkedList<>();
+    final long glfwContext;
     
-    public Window(int width, int height, String title, long monitor, long share, boolean supportOpenGl){
-        long window = glfwCreateWindow(width, height, title, monitor, share);
-        context = new Context(window);
+    public Window(int width, int height, String title){
+        this(width, height, title, 0, 0);
     }
     
-    public void addScene(Scene scene){
-        scenes.add(scene);
+    public Window(int width, int height, String title, Window share){
+        this(width, height, title, 0, share.glfwContext);
     }
     
-    public void addSceneBack(Scene scene){
-        scenes.add(scenes.size()-1, scene);
-    }
-    
-    
-    public void draw(){
-        context.makeCurrent();
-        scenes.forEach((sc) -> {
-            sc.draw();
-        });
-        glfwSwapBuffers(context.glfwContext);
+    Window(int width, int height, String title, long monitor, long share){
+        glfwContext = glfwCreateWindow(width, height, title, monitor, share);
+        bindMap = new ContextBindMap();
     }
     
     public boolean shouldClose(){
-        return glfwWindowShouldClose(context.glfwContext);
-    }
-    
-    public void setIcon(Image im){
-        glfwSetWindowIcon(context.glfwContext, new GLFWImage.Buffer(im.getPixels()));
+        return glfwWindowShouldClose(glfwContext);
     }
     
     public void show(){
-        glfwShowWindow(context.glfwContext);
+        glfwShowWindow(glfwContext);
     }
     
     public void hide(){
-        glfwHideWindow(context.glfwContext);
+        glfwHideWindow(glfwContext);
+    }
+
+    @Override
+    public void makeCurrent() {
+        glfwMakeContextCurrent(glfwContext);
+        super.makeCurrent();
+    }
+    
+    
+    
+    private final ContextBindMap bindMap;
+    @Override
+    public ContextBindMap getContextBindMap() {
+        return bindMap;
     }
     
     

@@ -21,12 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package ez.graphics.gl;
+package ez.gl;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author vlad
  */
-public class SyncObject {
-    //TODO
+public class ContextBindMap {
+    
+    private TextureUnit activeUnit;
+    private Program program = Program.NULL_PROGRAM;
+    
+    Map<TextureUnit, Texture> textures = new HashMap<>();
+    
+    public Program getProgram(){return program;}
+    void setProgram(Program p){program = p;}
+    
+    public TextureUnit getTextureUnit(){return activeUnit;}
+    void setTextureUnit(TextureUnit unit){activeUnit = unit;}
+    
+    public Texture getTexture(){return textures.get(getTextureUnit());}
+    void setTexture(Texture tex){textures.put(getTextureUnit(), tex);}
+    
+    
 }

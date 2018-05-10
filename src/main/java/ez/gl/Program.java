@@ -1,7 +1,7 @@
-package ez.graphics.gl;
+package ez.gl;
 
-import ez.graphics.Context;
 import java.nio.IntBuffer;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +10,14 @@ import static org.lwjgl.opengl.GL20.*;
 import org.lwjgl.system.MemoryStack;
 
 public final class Program implements GLObject{
-
+    
+    
+    public static final Program NULL_PROGRAM = new Program();
+    private Program(){
+        program = NULLOBJ;
+        uniforms = Collections.EMPTY_MAP;
+    }
+    
     int program;
 
     private Map<String, Uniform> uniforms;

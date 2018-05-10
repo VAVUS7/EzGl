@@ -21,15 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package ez.graphics;
+package ez.gl;
+
+import static org.lwjgl.opengl.GL11.GL_LINEAR;
+import static org.lwjgl.opengl.GL11.GL_NEAREST;
 
 /**
  *
  * @author vlad
  */
-public abstract class Scene {
+public enum MagFilter {
     
+    NEAREST(GL_NEAREST),
+    LINEAR(GL_LINEAR);
     
-    public abstract void draw();
+    public final int MAG_FILTER;
     
+    MagFilter(int filter){
+        MAG_FILTER = filter;
+    }
 }

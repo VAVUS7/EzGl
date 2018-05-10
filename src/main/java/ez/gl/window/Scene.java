@@ -21,28 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package ez.image.color;
+package ez.gl.window;
 
 /**
  *
  * @author vlad
  */
-public interface Color {
+public abstract class Scene {
     
-    public float red();
-    public float green();
-    public float blue();
-    public float alpha();
     
-    public static Color blend(Color c1, Color c2){
-        return blend(c1, c2, c2.alpha());
-    }
-    
-    //TODO: реалистичная функция смешивания
-    public static Color blend(Color c1, Color c2, float opacity){
-        throw new UnsupportedOperationException();
-    }
+    public abstract void draw();
     
 }
-
-
