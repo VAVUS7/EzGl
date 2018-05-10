@@ -7,8 +7,6 @@ package window;
 
 import ez.gl.window.Graphics;
 import ez.gl.window.Window;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
 
 /**
  *
