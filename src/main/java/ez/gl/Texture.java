@@ -27,6 +27,7 @@ import ez.gl.enums.MinFilter;
 import ez.gl.enums.MagFilter;
 import ez.gl.enums.TextureType;
 import ez.gl.enums.WrapMode;
+import org.lwjgl.opengl.GL;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
@@ -67,6 +68,11 @@ public abstract class Texture implements ObjectGLBind{
             glDeleteTextures(texture);
             texture = NULLOBJ;
         }
+    }
+    
+    protected static void checkBind(Texture tex){
+        if(Context.currentContext().getContextBindMap().getTexture() != tex)
+            throw new RuntimeException("Texture must be bind.");
     }
     
     protected final static void genMipmap(TextureType type){

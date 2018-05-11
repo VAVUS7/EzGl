@@ -63,7 +63,11 @@ public class Window extends Context{
     public void hide(){
         glfwHideWindow(glfwContext);
     }
-
+    
+    public void swapBuffers(){
+        glfwSwapBuffers(glfwContext);
+    }
+    
     @Override
     public void makeCurrent() {
         glfwMakeContextCurrent(glfwContext);

@@ -21,5 +21,11 @@ public class WindowSystemTest {
         Window w = new Window(500, 500, "window");
         w.show();
         Thread.sleep(1000);
+        
+        final int c = 1;
+        switch(c){
+            case 0: System.out.println("window.WindowSystemTest.main()"); break;
+            case 1: System.out.println("gg"); break;
+        }
     }
 }
