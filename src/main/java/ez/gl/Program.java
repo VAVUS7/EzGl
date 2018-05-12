@@ -66,14 +66,14 @@ public final class Program implements ObjectGL{
 
     public void use() {
         ContextBindMap map;
-        if((map = Context.currentContext().getContextBindMap()).getProgram() != this){
+        if((map = Context.currentContext().getBindMap()).getProgram() != this){
             glUseProgram(program);
             map.setProgram(this);
         }
     }
 
     public boolean isUse(){
-        return Context.currentContext().getContextBindMap().getProgram() == this;
+        return Context.currentContext().getBindMap().getProgram() == this;
     }
     
     /**

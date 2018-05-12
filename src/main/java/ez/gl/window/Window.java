@@ -78,7 +78,7 @@ public class Window extends Context{
     
     private final ContextBindMap bindMap;
     @Override
-    public ContextBindMap getContextBindMap() {
+    public ContextBindMap getBindMap() {
         return bindMap;
     }
     

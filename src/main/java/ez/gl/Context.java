@@ -38,5 +38,5 @@ public abstract class Context{
         if(!isCurrent()) CURRENT_CONTEXT.set(this);
     }
     
-    public abstract ContextBindMap getContextBindMap();
+    public abstract ContextBindMap getBindMap();
 }

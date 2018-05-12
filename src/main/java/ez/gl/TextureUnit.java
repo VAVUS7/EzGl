@@ -39,7 +39,7 @@ public final class TextureUnit {
     
     public void active(){
         ContextBindMap map;
-        if((map = Context.currentContext().getContextBindMap()).getTextureUnit() != this){
+        if((map = Context.currentContext().getBindMap()).getTextureUnit() != this){
             glActiveTexture(unit);
             map.setTextureUnit(this);
         }

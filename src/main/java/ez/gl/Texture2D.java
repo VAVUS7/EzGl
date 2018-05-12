@@ -29,9 +29,6 @@ public class Texture2D extends Texture{
                 im.getWidth(), im.getHeight(), 0, asGlPixelFormat(im.getComponents()), 
                 GL_UNSIGNED_BYTE, im.getPixels());
     }
-    
-    @Override
-    public void bind(){bindTexture(this, getType());}
 
     @Override
     public TextureType getType() {return TEXTURE_2D;}
