@@ -23,13 +23,10 @@ public class Texture2D extends Texture{
     }
     
     public void texImage(Image im){
-        bind();
+        bind(TEXTURE_2D);
         glTexImage2D(
                 GL_TEXTURE_2D, 0, asGlPixelFormat(im.getComponents()), 
                 im.getWidth(), im.getHeight(), 0, asGlPixelFormat(im.getComponents()), 
                 GL_UNSIGNED_BYTE, im.getPixels());
     }
-
-    @Override
-    public TextureType getType() {return TEXTURE_2D;}
 }

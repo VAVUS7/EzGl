@@ -28,6 +28,7 @@ import ez.gl.enums.MagFilter;
 import ez.gl.enums.TextureType;
 import ez.gl.enums.WrapMode;
 import static ez.gl.Context.*;
+import java.util.Observer;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
@@ -36,23 +37,12 @@ import static org.lwjgl.opengl.GL30.glGenerateMipmap;
  *
  * @author vlad
  */
-public abstract class Texture implements ObjectGLBind{
+public abstract class Texture implements ObjectGL{
     
     protected int texture;
     
     public static Texture NO_TEXTURE = new Texture(NULLOBJ){
-        @Override
-        public TextureType getType() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
 
-        @Override
-        public void bind() {
-            ContextBindMap map = currentContext().getBindMap();
-            if(map.getTexture() != this){
-                super.bind(map.getTexture().getType());
-            }
-        }
     };
     
     private Texture(int texture){
@@ -74,12 +64,6 @@ public abstract class Texture implements ObjectGLBind{
         }
     }
     
-    /**
-     * Возвращает тип данного объекта текстуры.
-     * @return тип текстуры.
-     */
-    public abstract TextureType getType();
-    
     
     @Override
     public void delete(){
@@ -99,11 +83,6 @@ public abstract class Texture implements ObjectGLBind{
         glBindTexture(type.asGLenum(), this.texture);
         context.getBindMap().setTexture(this);
     }
-    
-    @Override
-    public void bind(){
-        bind(getType());
-    }    
     
     protected final static void genMipmap(TextureType type){
         glGenerateMipmap(type.asGLenum());

@@ -5,6 +5,8 @@
  */
 package ez.gl.enums;
 
+import java.util.Observable;
+import java.util.Observer;
 import static org.lwjgl.opengl.GL11.*;
 
 /**
