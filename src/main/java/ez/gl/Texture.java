@@ -41,8 +41,10 @@ public abstract class Texture implements ObjectGL{
     
     protected int texture;
     
-    public static Texture NO_TEXTURE = new Texture(NULLOBJ){
-
+    public static final Texture NO_TEXTURE = new Texture(NULLOBJ){
+        //можем переопределять или добавлять новые методы 
+        //или переопределять старые, но не статичные функции.
+        //Это, по-моему, анонимный внутренний класс
     };
     
     private Texture(int texture){
