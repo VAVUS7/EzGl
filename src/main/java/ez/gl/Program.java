@@ -4,7 +4,7 @@ import java.nio.IntBuffer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
+import static ez.gl.Context.*;
 import static org.lwjgl.opengl.GL11.GL_FALSE;
 import static org.lwjgl.opengl.GL20.*;
 import org.lwjgl.system.MemoryStack;
@@ -71,9 +71,10 @@ public final class Program implements ObjectGL{
             map.setProgram(this);
         }
     }
-
-    public boolean isUse(){
-        return Context.currentContext().getBindMap().getProgram() == this;
+    
+    public void check(){
+        if(currentContext().getBindMap().getProgram() != this)
+            throw new RuntimeException("Program must be bind.");
     }
     
     /**

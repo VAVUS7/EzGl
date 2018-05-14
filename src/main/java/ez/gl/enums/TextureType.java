@@ -5,9 +5,10 @@
  */
 package ez.gl.enums;
 
-import java.util.Observable;
-import java.util.Observer;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE_CUBE_MAP;
+import static org.lwjgl.opengl.GL30.GL_TEXTURE_1D_ARRAY;
+import static org.lwjgl.opengl.GL31.GL_TEXTURE_RECTANGLE;
 
 /**
  *
@@ -15,7 +16,10 @@ import static org.lwjgl.opengl.GL11.*;
  */
 public enum TextureType implements GLenum{
     
-    TEXTURE_2D(GL_TEXTURE_2D)
+    TEXTURE_2D(GL_TEXTURE_2D),
+    TEXTURE_1D_ARRAY(GL_TEXTURE_1D_ARRAY),
+    TEXTURE_RECTANGLE(GL_TEXTURE_RECTANGLE),
+    TEXTURE_CUBE_MAP(GL_TEXTURE_CUBE_MAP)
     
     ;
     

@@ -35,7 +35,7 @@ public abstract class Texture implements ObjectGL{
         texture = glGenTextures();
     }
     
-    protected void check(Context context){
+    public void check(Context context){
         if(context.getBindMap().getTexture() != this)
             throw new RuntimeException("Texture must be bind.");
     }
