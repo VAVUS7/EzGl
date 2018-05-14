@@ -21,8 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package ez.gl;
+package ez.gl.texture;
 
+import ez.gl.Context;
+import ez.gl.ContextBindMap;
 import static org.lwjgl.opengl.GL13.*;
 
 /**

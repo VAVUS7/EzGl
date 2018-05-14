@@ -8,15 +8,11 @@ package window;
 import ez.gl.window.Graphics;
 import ez.gl.window.Window;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.ARBFramebufferObject;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import org.lwjgl.opengl.GL12;
 import static org.lwjgl.opengl.GL12.GL_TEXTURE_3D;
-import org.lwjgl.opengl.GL13;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
-import org.lwjgl.opengl.GL31;
 
 /**
  *

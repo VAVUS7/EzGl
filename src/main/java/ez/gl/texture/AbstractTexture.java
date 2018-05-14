@@ -21,14 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package ez.gl;
+package ez.gl.texture;
 
 import ez.gl.enums.MinFilter;
 import ez.gl.enums.MagFilter;
 import ez.gl.enums.TextureType;
 import ez.gl.enums.WrapMode;
 import static ez.gl.Context.*;
-import java.util.Observer;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
@@ -37,67 +36,17 @@ import static org.lwjgl.opengl.GL30.glGenerateMipmap;
  *
  * @author vlad
  */
-public abstract class Texture implements ObjectGL{
+public abstract class AbstractTexture extends Texture{
     
-    protected int texture;
-    
-    public static final Texture NO_TEXTURE = new Texture(NULLOBJ){
-        //можем переопределять или добавлять новые методы 
-        //или переопределять старые, но не статичные функции.
-        //Это, по-моему, анонимный внутренний класс
-    };
-    
-    private Texture(int texture){
-        this.texture = texture;
-    }
-    
-    protected Texture() {
-        texture = glGenTextures();
-    }
-    
-    @Deprecated
-    protected static int asGlPixelFormat(int comp){
-        switch(comp){
-            case 1: return GL_LUMINANCE;
-            case 2: return GL_LUMINANCE_ALPHA;
-            case 3: return GL_RGB;
-            case 4: return GL_RGBA;
-            default: throw new IllegalArgumentException();
-        }
-    }
-    
-    
-    @Override
-    public void delete(){
-        if(texture != NULLOBJ){
-            glDeleteTextures(texture);
-            texture = NULLOBJ;
-        }
-    }
-    
-    protected void check(Context context){
-        if(context.getBindMap().getTexture() != this)
-            throw new RuntimeException("Texture must be bind.");
-    }
-    
-    public final void bind(TextureType type){
-        Context context = currentContext();
-        glBindTexture(type.asGLenum(), this.texture);
-        context.getBindMap().setTexture(this);
-    }
-    
-    protected final static void genMipmap(TextureType type){
-        glGenerateMipmap(type.asGLenum());
+    public final void genMipmap(){
+        check(currentContext());
+        glGenerateMipmap(getType().asGLenum());
     }
     
     protected final static void setWrapping(TextureType type, WrapMode s){
         glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_S, s.asGLenum());
     }
-    
-    protected final static void setWrapping(TextureType type, WrapMode s, WrapMode t){
-        glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_S, s.asGLenum());
-        glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_T, t.asGLenum());
-    }
+
     
     protected final static void setWrapping(TextureType type, WrapMode s, WrapMode t, WrapMode r){
         glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_S, s.asGLenum());

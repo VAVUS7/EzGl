@@ -10,7 +10,5 @@ package ez.gl;
  * @author vlad
  */
 public interface ObjectGLBind extends ObjectGL{
-    
-    
     public void bind();
 }
