@@ -23,8 +23,6 @@
  */
 package ez.gl;
 
-import ez.gl.texture.Texture;
-import ez.gl.texture.TextureUnit;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,19 +32,19 @@ import java.util.Map;
  */
 public class ContextBindMap {
     
-    private TextureUnit activeUnit;
-    private Program program = Program.NULL_PROGRAM;
+    private Program program = Program.NO_PROGRAM;
     
-    Map<TextureUnit, Texture> textures = new HashMap<>();
+    private TextureUnit activeUnit;
+    Map<TextureUnit, Texture> textures = new HashMap<>(1);
     
     public Program getProgram(){return program;}
-    public void setProgram(Program p){program = p;}
+    void setProgram(Program p){program = p;}
     
     public TextureUnit getTextureUnit(){return activeUnit;}
-    public void setTextureUnit(TextureUnit unit){activeUnit = unit;}
+    void setTextureUnit(TextureUnit unit){activeUnit = unit;}
     
     public Texture getTexture(){return textures.get(getTextureUnit());}
-    public void setTexture(Texture tex){textures.put(getTextureUnit(), tex);}
+    void setTexture(Texture tex){textures.put(getTextureUnit(), tex);}
     
     
 }

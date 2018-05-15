@@ -1,10 +1,8 @@
 package ez.gl;
 
-import static ez.gl.ObjectGL.*;
 import org.joml.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL21.*;
-import org.lwjgl.opengl.GL40;
 import static org.lwjgl.opengl.GL40.*;
 import org.lwjgl.system.MemoryStack;
 

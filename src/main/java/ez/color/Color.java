@@ -42,7 +42,6 @@ public interface Color {
     public static Color blend(Color c1, Color c2, float opacity){
         throw new UnsupportedOperationException();
     }
-    
 }
 
 

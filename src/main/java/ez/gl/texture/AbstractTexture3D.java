@@ -5,8 +5,6 @@
  */
 package ez.gl.texture;
 
-import ez.gl.enums.TextureType;
-
 /**
  *
  * @author vlad

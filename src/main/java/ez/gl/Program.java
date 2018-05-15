@@ -1,5 +1,8 @@
 package ez.gl;
 
+import ez.gl.Context;
+import ez.gl.ContextBindMap;
+import ez.gl.ObjectGL;
 import java.nio.IntBuffer;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,14 +15,13 @@ import org.lwjgl.system.MemoryStack;
 public final class Program implements ObjectGL{
     
     
-    public static final Program NULL_PROGRAM = new Program();
+    public static final Program NO_PROGRAM = new Program();
     private Program(){
         program = NULLOBJ;
         uniforms = Collections.EMPTY_MAP;
     }
     
     int program;
-
     private Map<String, Uniform> uniforms;
 
     /**
@@ -72,9 +74,9 @@ public final class Program implements ObjectGL{
         }
     }
     
-    public void check(){
+    protected void check(){
         if(currentContext().getBindMap().getProgram() != this)
-            throw new RuntimeException("Program must be bind.");
+            throw new RuntimeException("Program must be use.");
     }
     
     /**

@@ -23,10 +23,11 @@
  */
 package ez.gl.texture;
 
-import ez.gl.enums.MinFilter;
 import ez.gl.enums.MagFilter;
-import ez.gl.enums.TextureType;
 import ez.gl.enums.WrapMode;
+import ez.gl.enums.MinFilter;
+import ez.gl.enums.TextureType;
+import ez.gl.Texture;
 import static ez.gl.Context.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;

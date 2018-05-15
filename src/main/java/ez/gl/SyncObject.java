@@ -27,6 +27,7 @@ package ez.gl;
  *
  * @author vlad
  */
+//TODO
 public class SyncObject {
     //TODO
 }

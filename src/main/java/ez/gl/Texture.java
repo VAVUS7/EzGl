@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ez.gl.texture;
+package ez.gl;
 
 import ez.gl.Context;
 import ez.gl.ObjectGL;
@@ -35,7 +35,7 @@ public abstract class Texture implements ObjectGL{
         texture = glGenTextures();
     }
     
-    public void check(Context context){
+    protected void check(Context context){
         if(context.getBindMap().getTexture() != this)
             throw new RuntimeException("Texture must be bind.");
     }

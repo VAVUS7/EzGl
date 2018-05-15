@@ -5,9 +5,9 @@
  */
 package ez.gl.texture;
 
+import ez.gl.enums.WrapMode;
 import ez.image.Image;
 import static ez.gl.Context.*;
-import ez.gl.enums.WrapMode;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_WRAP_S;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_WRAP_T;
 import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;

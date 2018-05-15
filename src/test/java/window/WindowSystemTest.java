@@ -5,8 +5,11 @@
  */
 package window;
 
+import ez.gl.Shader;
+import ez.gl.enums.ShaderType;
 import ez.gl.window.Graphics;
 import ez.gl.window.Window;
+import java.io.IOException;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
@@ -21,14 +24,15 @@ import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 public class WindowSystemTest {
     
     
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         System.out.println("RUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUN");
         Graphics.init();
         Window w = new Window(500, 500, "window");
         w.show();
         w.makeCurrent();
-        
         GL.createCapabilities();
+        
+        Shader vsh = new Shader(ShaderType.VERTEX, "src/main/resources/shaders/vertex-pos-col.glsl");
         
         int t = GL11.glGenTextures();
         int tN = 0;
