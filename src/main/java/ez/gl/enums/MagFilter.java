@@ -23,6 +23,7 @@
  */
 package ez.gl.enums;
 
+import ez.gl.GLenum;
 import static org.lwjgl.opengl.GL11.GL_LINEAR;
 import static org.lwjgl.opengl.GL11.GL_NEAREST;
 

@@ -23,6 +23,7 @@
  */
 package ez.gl.enums;
 
+import ez.gl.GLenum;
 import static org.lwjgl.opengl.GL11.GL_REPEAT;
 import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 import static org.lwjgl.opengl.GL13.GL_CLAMP_TO_BORDER;

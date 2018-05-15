@@ -5,6 +5,7 @@
  */
 package ez.gl.enums;
 
+import ez.gl.GLenum;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE_CUBE_MAP;
 import static org.lwjgl.opengl.GL30.GL_TEXTURE_1D_ARRAY;
