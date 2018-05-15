@@ -1,8 +1,5 @@
 package ez.gl;
 
-import ez.gl.Context;
-import ez.gl.ContextBindMap;
-import ez.gl.ObjectGL;
 import java.nio.IntBuffer;
 import java.util.Collections;
 import java.util.HashMap;
@@ -43,7 +40,6 @@ public final class Program implements ObjectGL{
 
     private void loadUniforms(){
         int active = glGetProgrami(program, GL_ACTIVE_UNIFORMS);
-        //uniforms = new HashMap<>(active, 1.0f);
         uniforms = new HashMap<>(active/3 + active+1);
         try(MemoryStack stack = MemoryStack.stackPush()){
             IntBuffer size = stack.mallocInt(1);

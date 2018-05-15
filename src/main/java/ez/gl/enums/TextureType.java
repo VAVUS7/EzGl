@@ -18,11 +18,12 @@ import static org.lwjgl.opengl.GL31.GL_TEXTURE_RECTANGLE;
 public enum TextureType implements GLenum{
     
     TEXTURE_2D(GL_TEXTURE_2D),
-    TEXTURE_1D_ARRAY(GL_TEXTURE_1D_ARRAY),
-    TEXTURE_RECTANGLE(GL_TEXTURE_RECTANGLE),
-    TEXTURE_CUBE_MAP(GL_TEXTURE_CUBE_MAP)
     
-    ;
+    TEXTURE_1D_ARRAY(GL_TEXTURE_1D_ARRAY),
+    
+    TEXTURE_RECTANGLE(GL_TEXTURE_RECTANGLE),
+    
+    TEXTURE_CUBE_MAP(GL_TEXTURE_CUBE_MAP);
     
     private final int type;
     

@@ -1,21 +1,30 @@
 package ez.gl;
 
-import ez.gl.ObjectGL;
 import ez.gl.enums.ShaderType;
 import java.io.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
 
-public final class Shader implements ObjectGL{
+public abstract class Shader implements ObjectGL, Typable{
 
-    int shader;
+    protected int shader;
     
-    public Shader(ShaderType type, String file) throws IOException {
+    protected Shader(ShaderType type, String file) throws IOException {
         shader = createShader(type, loadFromStream(new FileInputStream(file)));
     }
     
-    public Shader(ShaderType type, InputStream in) throws IOException {
+    protected Shader(ShaderType type, InputStream in) throws IOException {
         shader = createShader(type, loadFromStream(in));
+    }
+    
+    protected static int createShader(ShaderType type, String file) throws IOException{
+        try(FileInputStream st = new FileInputStream(file)){
+            return createShader(type, loadFromStream(st));
+        }
+    }
+    
+    protected static int createShader(ShaderType type, InputStream in) throws IOException{
+        return createShader(type, loadFromStream(in));
     }
     
     private static int createShader(ShaderType type, CharSequence strings){
@@ -44,6 +53,9 @@ public final class Shader implements ObjectGL{
             shader = NULLOBJ;
         }
     }
+
+    @Override
+    public abstract ShaderType getType();
 }
 
 class ShaderCompileException extends RuntimeException {

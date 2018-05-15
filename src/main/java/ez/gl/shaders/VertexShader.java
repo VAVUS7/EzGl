@@ -21,55 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package ez.gl;
+package ez.gl.shaders;
 
-import static org.lwjgl.opengl.GL13.*;
+import ez.gl.Shader;
+import ez.gl.enums.ShaderType;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  *
  * @author vlad
  */
-public final class TextureUnit {
+public class VertexShader extends Shader{
     
-    private final int unit;
-
-    private TextureUnit(int unit){
-        this.unit = unit;
+    public VertexShader(String file) throws IOException{
+        super(ShaderType.VERTEX, file);
     }
     
-    public void active(){
-        ContextBindMap map;
-        if((map = Context.currentContext().getBindMap()).getTextureUnit() != this){
-            glActiveTexture(GL_TEXTURE0 + unit);
-            map.setTextureUnit(this);
-        }
+    public VertexShader(InputStream in) throws IOException{
+        super(ShaderType.VERTEX, in);
     }
-    
-    public static TextureUnit unitOf(int unit){
-        return new TextureUnit(unit);
-    }
-    
-    
     
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + this.unit;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final TextureUnit other = (TextureUnit) obj;
-        return this.unit == other.unit;
-    }
+    public ShaderType getType() {return ShaderType.VERTEX;}
+    
 }

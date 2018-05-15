@@ -16,7 +16,7 @@ import static org.lwjgl.opengl.GL11.*;
  *
  * @author vlad
  */
-public abstract class Texture implements ObjectGL{
+public abstract class Texture implements ObjectGL, Typable{
     
     protected int texture;
     
