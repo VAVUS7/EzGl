@@ -5,15 +5,16 @@ import java.io.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
 
-public abstract class Shader implements ObjectGL, Typable{
-
+public class Shader implements ObjectGL, Typable{
+    
+    protected ShaderType type;
     protected int shader;
     
-    protected Shader(ShaderType type, String file) throws IOException {
+    public Shader(ShaderType type, String file) throws IOException {
         shader = createShader(type, loadFromStream(new FileInputStream(file)));
     }
     
-    protected Shader(ShaderType type, InputStream in) throws IOException {
+    public Shader(ShaderType type, InputStream in) throws IOException {
         shader = createShader(type, loadFromStream(in));
     }
     
@@ -33,7 +34,7 @@ public abstract class Shader implements ObjectGL, Typable{
         glCompileShader(shader);
         if (glGetShaderi(shader, GL_COMPILE_STATUS) == GL_FALSE){
             throw new ShaderCompileException(
-                    type + ": " + glGetShaderInfoLog(shader)
+                    type + ": " + System.lineSeparator() + glGetShaderInfoLog(shader)
             );
         }
         return shader;
@@ -55,7 +56,7 @@ public abstract class Shader implements ObjectGL, Typable{
     }
 
     @Override
-    public abstract ShaderType getType();
+    public ShaderType getType(){return type;}
 }
 
 class ShaderCompileException extends RuntimeException {

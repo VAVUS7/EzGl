@@ -5,8 +5,10 @@
  */
 package window;
 
+import ez.gl.Program;
 import ez.gl.Shader;
 import ez.gl.enums.ShaderType;
+import ez.gl.texture.Texture2D;
 import ez.gl.window.Graphics;
 import ez.gl.window.Window;
 import java.io.IOException;
@@ -24,7 +26,7 @@ import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 public class WindowSystemTest {
     
     
-    public static void main(String[] args) throws InterruptedException, IOException {
+    public static void main(String[] args) throws IOException{
         System.out.println("RUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUNRUN");
         Graphics.init();
         Window w = new Window(500, 500, "window");
@@ -32,17 +34,18 @@ public class WindowSystemTest {
         w.makeCurrent();
         GL.createCapabilities();
         
-        Shader vsh = new Shader(ShaderType.VERTEX, "src/main/resources/shaders/vertex-pos-col.glsl");
+        Program prog;
+        Shader v = new Shader(ShaderType.VERTEX, "src/test/resources/shaders/v-_-pt-t.glsl");
+        Shader f = new Shader(ShaderType.FRAGMENT, "src/test/resources/shaders/f-s-t.glsl"); 
         
-        int t = GL11.glGenTextures();
-        int tN = 0;
+        Texture2D tex = new Texture2D();
+        
+        
         while (!w.shouldClose()) {
-            GL11.glBindTexture(GL_TEXTURE_2D, t);
-            tN++;
-            glGenerateMipmap(GL_TEXTURE_3D);
-            System.out.println(GL11.glGetError());
+            
+            
             w.swapBuffers();
-            GLFW.glfwPollEvents();
+            Window.pollEvents();
         }
     }
 }

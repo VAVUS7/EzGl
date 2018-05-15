@@ -25,11 +25,7 @@ package ez.gl.window;
 
 import ez.gl.Context;
 import ez.gl.ContextBindMap;
-import ez.image.Image;
-import java.util.LinkedList;
-import java.util.List;
 import static org.lwjgl.glfw.GLFW.*;
-import org.lwjgl.glfw.GLFWImage;
 /**
  *
  * @author vlad
@@ -50,6 +46,12 @@ public class Window extends Context{
     Window(int width, int height, String title, long monitor, long share){
         glfwContext = glfwCreateWindow(width, height, title, monitor, share);
         bindMap = new ContextBindMap();
+    }
+    
+    private final ContextBindMap bindMap;
+    @Override
+    public ContextBindMap getBindMap() {
+        return bindMap;
     }
     
     public boolean shouldClose(){
@@ -75,13 +77,9 @@ public class Window extends Context{
     }
     
     
-    
-    private final ContextBindMap bindMap;
-    @Override
-    public ContextBindMap getBindMap() {
-        return bindMap;
+    public static final void pollEvents(){
+        glfwPollEvents();
     }
-    
     
     
 }

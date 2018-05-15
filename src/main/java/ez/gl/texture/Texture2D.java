@@ -5,7 +5,9 @@
  */
 package ez.gl.texture;
 
+import ez.gl.Texture;
 import ez.gl.enums.TextureType;
+import ez.image.Image;
 
 /**
  *
@@ -15,5 +17,4 @@ public class Texture2D extends AbstractTexture2D{
 
     @Override
     public TextureType getType() {return TextureType.TEXTURE_2D;}
-    
 }
