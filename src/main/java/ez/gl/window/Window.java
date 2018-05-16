@@ -24,7 +24,7 @@
 package ez.gl.window;
 
 import ez.gl.Context;
-import ez.gl.ContextBindMap;
+import ez.gl.BindMap;
 import static org.lwjgl.glfw.GLFW.*;
 /**
  *
@@ -45,12 +45,12 @@ public class Window extends Context{
     
     Window(int width, int height, String title, long monitor, long share){
         glfwContext = glfwCreateWindow(width, height, title, monitor, share);
-        bindMap = new ContextBindMap();
+        bindMap = new BindMap();
     }
     
-    private final ContextBindMap bindMap;
+    private final BindMap bindMap;
     @Override
-    public ContextBindMap getBindMap() {
+    public BindMap getBindMap() {
         return bindMap;
     }
     

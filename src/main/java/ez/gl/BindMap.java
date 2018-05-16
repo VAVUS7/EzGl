@@ -30,19 +30,27 @@ import java.util.Map;
  *
  * @author vlad
  */
-public class ContextBindMap {
+public class BindMap {
     
     private Program program = Program.NO_PROGRAM;
     
     private TextureUnit activeUnit;
     Map<TextureUnit, Texture> textures = new HashMap<>(1);
     
+    public void checkProgram(Program p){
+        if(getProgram() != p)
+            throw new RuntimeException("Program must be use.");
+    }
     public Program getProgram(){return program;}
     void setProgram(Program p){program = p;}
     
     public TextureUnit getTextureUnit(){return activeUnit;}
     void setTextureUnit(TextureUnit unit){activeUnit = unit;}
     
+    public void checkTexture(Texture t){
+        if(getTexture()!= t)
+            throw new RuntimeException("Texture must be bind to active unit.");
+    }
     public Texture getTexture(){return textures.get(getTextureUnit());}
     void setTexture(Texture tex){textures.put(getTextureUnit(), tex);}
     

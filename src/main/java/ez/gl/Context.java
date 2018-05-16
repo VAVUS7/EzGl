@@ -31,12 +31,18 @@ public abstract class Context{
     
     private static final ThreadLocal<Context> CURRENT_CONTEXT = new ThreadLocal<>();
     
+    
+    
     public static final Context currentContext(){return CURRENT_CONTEXT.get();}
+    public static BindMap currentBindMap(){return currentContext().getBindMap();}
+    
+    
     public final boolean isCurrent(){return this == currentContext();}
+    
     
     public void makeCurrent() {
         if(!isCurrent()) CURRENT_CONTEXT.set(this);
     }
     
-    public abstract ContextBindMap getBindMap();
+    protected abstract BindMap getBindMap();
 }

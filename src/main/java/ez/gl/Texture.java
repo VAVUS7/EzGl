@@ -10,7 +10,13 @@ import ez.gl.ObjectGL;
 import static ez.gl.ObjectGL.NULLOBJ;
 import ez.gl.enums.TextureType;
 import static ez.gl.Context.*;
+import ez.gl.enums.MagFilter;
+import ez.gl.enums.MinFilter;
+import ez.gl.enums.WrapMode;
+import ez.image.Image;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL12.GL_TEXTURE_WRAP_R;
+import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 
 /**
  *
@@ -35,27 +41,67 @@ public abstract class Texture implements ObjectGL, Typable{
         texture = glGenTextures();
     }
     
-    protected void check(Context context){
-        if(context.getBindMap().getTexture() != this)
-            throw new RuntimeException("Texture must be bind.");
-    }
-    
     public final void bind(){
         Context context = currentContext();
-        check(context);
-        glBindTexture(getType().asGLenum(), this.texture);
-        context.getBindMap().setTexture(this);
+        if(context.getBindMap().getTexture() != this){
+            glBindTexture(getType().asGLenum(), this.texture);
+            context.getBindMap().setTexture(this);
+        }
     }
     
     @Override
-    public void delete(){
+    public final void delete(){
         if(texture != NULLOBJ){
             glDeleteTextures(texture);
             texture = NULLOBJ;
         }
     }
     
+    @Override
     public abstract TextureType getType();
+    
+    
+    
+    
+    protected static void texImage1D(TextureType type, Image im){
+        glTexImage1D(type.asGLenum(), 0, asGlPixelFormat(im.getComponents()), 
+                im.getHeight()*im.getWidth(), 0, asGlPixelFormat(im.getComponents()), GL_UNSIGNED_BYTE, im.getPixels());
+    }
+    
+    protected static void texImage2D(TextureType type, Image im){
+        glTexImage2D(
+                type.asGLenum(), 0, asGlPixelFormat(im.getComponents()), 
+                im.getWidth(), im.getHeight(), 0, asGlPixelFormat(im.getComponents()), 
+                GL_UNSIGNED_BYTE, im.getPixels());
+    }
+    
+    
+    
+    
+    protected static final void generateMipmap(TextureType type){
+        glGenerateMipmap(type.asGLenum());
+    }
+    
+    protected final static void setWrapping(TextureType type, WrapMode s){
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_S, s.asGLenum());
+    }
+    
+    protected final static void setWrapping(TextureType type, WrapMode s, WrapMode t){
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_S, s.asGLenum());
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_T, t.asGLenum());
+    }
+    
+    protected final static void setWrapping(TextureType type, WrapMode s, WrapMode t, WrapMode r){
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_S, s.asGLenum());
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_T, t.asGLenum());
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_WRAP_R, r.asGLenum());
+    }
+    
+    protected final static void setFilters(TextureType type, MinFilter min, MagFilter mag){
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_MIN_FILTER, min.asGLenum());
+        glTexParameteri(type.asGLenum(), GL_TEXTURE_MAG_FILTER, mag.asGLenum());
+    }
+    
     
     @Deprecated
     protected static int asGlPixelFormat(int comp){

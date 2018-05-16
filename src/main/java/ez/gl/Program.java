@@ -63,16 +63,11 @@ public final class Program implements ObjectGL{
     }
 
     public void use() {
-        ContextBindMap map;
-        if((map = Context.currentContext().getBindMap()).getProgram() != this){
+        BindMap map;
+        if((map = currentBindMap()).getProgram() != this){
             glUseProgram(program);
             map.setProgram(this);
         }
-    }
-    
-    protected void check(){
-        if(currentContext().getBindMap().getProgram() != this)
-            throw new RuntimeException("Program must be use.");
     }
     
     /**
